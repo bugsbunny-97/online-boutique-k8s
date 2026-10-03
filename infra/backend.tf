@@ -1,0 +1,6 @@
+# Partial configuration: the actual values live in backend.hcl (git-ignored)
+# because backend blocks cannot use variables.
+#   terraform init -backend-config=backend.hcl
+terraform {
+  backend "s3" {}
+}
