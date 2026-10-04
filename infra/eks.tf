@@ -5,6 +5,14 @@ module "eks" {
   name               = local.cluster_name
   kubernetes_version = var.kubernetes_version
 
+  addons = {
+    coredns    = {}
+    kube-proxy = {}
+    vpc-cni = {
+      before_compute = true
+    }
+  }
+
   endpoint_public_access = true
   enable_irsa            = true
 

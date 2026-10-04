@@ -4,7 +4,7 @@ locals {
 }
 
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
   version = "~> 6.7.3"
 
   name = "${local.cluster_name}-vpc"
@@ -15,6 +15,7 @@ module "vpc" {
   private_subnets = [for i in range(length(local.availability_zones)) : cidrsubnet(var.vpc_cidr, 8, i)]
   public_subnets  = [for i in range(length(local.availability_zones)) : cidrsubnet(var.vpc_cidr, 8, i + length(local.availability_zones))]
 
+  enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
   enable_dns_support   = true
