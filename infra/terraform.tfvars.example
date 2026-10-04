@@ -1,3 +1,12 @@
-region      = "ap-south-1"
-project     = "eks-terraform"
-environment = "dev"
+region             = "ap-south-1"
+project            = "eks-terraform"
+environment        = "dev"
+vpc_cidr           = "10.42.0.0/16"
+kubernetes_version = "1.33"
+node_instance_type = "t3.small"
+node_min_size      = 1
+node_desired_size  = 2
+node_max_size      = 3
+
+# Restrict the public API endpoint to your own IP (check with: curl ifconfig.me)
+api_access_cidrs = ["0.0.0.0/0"]
