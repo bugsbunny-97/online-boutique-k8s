@@ -13,18 +13,19 @@ module "eks" {
     }
   }
 
-  endpoint_public_access = true
-  enable_irsa            = true
+  endpoint_public_access       = true
+  endpoint_public_access_cidrs = var.api_access_cidrs
+  enable_irsa                  = true
 
   enable_cluster_creator_admin_permissions = true
 
   eks_managed_node_groups = {
     general = {
       name                     = "${local.cluster_name}-general"
-      instance_types           = ["t3.small"]
-      min_size                 = 1
-      desired_size             = 2
-      max_size                 = 3
+      instance_types           = [var.node_instance_type]
+      min_size                 = var.node_min_size
+      desired_size             = var.node_desired_size
+      max_size                 = var.node_max_size
       iam_role_name            = "${local.cluster_name}-general-node"
       iam_role_use_name_prefix = false
     }
